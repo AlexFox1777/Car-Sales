@@ -24,7 +24,9 @@ export const featureReducer = (state = initialState, action) =>{
         case 'ADD_ITEM':
             return {...state, additionalPrice: state.additionalPrice+action.payload.price , car: {...state.car, features: [...state.car.features, action.payload]}};
         case  'REMOVE_ITEM' :
-            return {};
+
+            const newFeatures = state.car.features.filter(item => item !== action.payload);
+            return {...state, additionalPrice: state.additionalPrice - action.payload.price, car: {...state.car, features: [...newFeatures]}};
         default:
             return state;
     }
